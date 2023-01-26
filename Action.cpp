@@ -8,10 +8,18 @@ void jump()
 
 void block()
 {
-	cout << "Threats don't knock.";
+	system("cls");
+	cout << "Threats don't knock.\n";
 }
 
 void grapple()
 {
-	cout << "Grapple!";
+	system("cls");
+	cout << "Grapple!\n";
+}
+
+void cover()
+{
+	system("cls");
+	cout << "Covering.\n";
 }

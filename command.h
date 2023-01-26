@@ -28,3 +28,15 @@ class GrappleCommand : public Command
 public:
 	virtual void execute() { grapple(); }
 };
+
+class CoverCommand : public Command
+{
+public:
+	virtual void execute() { cover(); }
+};
+
+class BlockCommand : public Command
+{
+public:
+	virtual void execute() { block(); }
+};
