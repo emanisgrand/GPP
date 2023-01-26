@@ -1,11 +1,74 @@
 #include "pch.h"
 
-int main()
+/// <summary>
+/// Used to create an object that will represent a game action
+/// </summary>
+class Command
 {
-	InputHandler inputhandler;
-	
+public:
+	/// <summary>
+	/// Destructor
+	/// </summary>
+	virtual ~Command() {};
+	/// <summary>
+	/// Run the method.
+	/// </summary>
+	virtual void execute() {};
+};
+
+class JumpCommand : public Command
+{
+public:
+	virtual void execute() { jump(); }
+};
+
+class GrappleCommand : public Command
+{
+public:
+	virtual void execute() { grapple(); }
+};
+
+class CoverCommand : public Command
+{
+public:
+	virtual void execute() { cover(); }
+};
+
+class BlockCommand : public Command
+{
+public:
+	virtual void execute() { block(); }
+};
+
+/// <summary>
+/// Should store pointer to a COMMAND for each BUTTON.
+/// </summary>
+class InputHandler
+{
+private:
+	/// <summary>
+	/// TODO: returns true if the button value passed in matches
+	/// the hard coded comparison
+	/// </summary>
+	/// <returns></returns>
+	bool isPressed(int);
+
+public:
+	/// <summary>
+	/// Delegate execution of actions to Commands
+	/// </summary>
+	void handleInput(int);
+};
+
+
+int main()
+{	
 	MenuItem* menu = new MenuItem;
 
+	/// <summary>
+	/// Pointer to a Command class, initialized to a custom command.
+	/// </summary>
+	/// <returns>Object.</returns>
 	Command* button_x = new JumpCommand;
 	Command* button_y = new BlockCommand;
 	Command* button_a = new GrappleCommand;
@@ -37,3 +100,4 @@ int main()
 	} while (menu->option != 9);
 	
 }
+
