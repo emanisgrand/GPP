@@ -1,25 +1,27 @@
-#include <iostream>
-#include "input.h"
-using std::cout;
-using std::cin;
+#include "pch.h"
+
 int main()
 {
 	InputHandler inputhandler;
-	
-	int option;
+	MenuItem* menu = new MenuItem;
 
-	do {
-		cout << "Enter input.\n";
-		cin >> option;
-		
-		switch (option)
+	Command* button_x = new JumpCommand;
+	
+	do
+	{
+		DisplayMenu();
+
+		cin >> menu->option;
+		switch (menu->option)
 		{
-		case 0:
-			inputhandler.handleInput();
-			break;
-		default:
-			cout << "return.\n";
-			break;
+			DisplayMenu();
+			case BUTTON_X:
+				button_x->execute();
+				break;
+			default:
+				cout << "WRONG!\n";
+				break;
 		}
-	} while (option != 9);
+	} while (menu->option != 9);
+	
 }

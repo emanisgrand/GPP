@@ -1,24 +1,31 @@
 #include "input.h"
 using std::cout;
 
-void InputHandler::handleInput()
-{
-   if (isPressed(BUTTON_X)) jump();
-}
+Command* button_x = new JumpCommand;
 
-void InputHandler::jump()
+void InputHandler::handleInput(int button)
 {
-    cout << "jump!\n";
+    switch (button)
+    {
+    case BUTTON_X:
+        button_x->execute();
+        break;
+    default:
+        cout << "button not set.";
+        break;
+    }
 }
 
 bool InputHandler::isPressed(int val)
 {
-    if (val == BUTTON_X)
+    switch (val)
     {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
         return true;
-    }
-    else
-    {
+    default:
         return false;
     }
 }

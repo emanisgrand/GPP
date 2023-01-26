@@ -1,15 +1,26 @@
 #pragma once
 #define BUTTON_X 0
-#define BUTTON_Y 1
-#define BUTTON_A 2
-#define BUTTON_B 3
 #include <iostream>
+#include "command.h"
 
 class InputHandler
 {
 private:
+	/// <summary>
+	/// TODO: returns true if the button value passed in matches
+	/// the hard coded comparison
+	/// </summary>
+	/// <returns></returns>
 	bool isPressed(int);
+
 public:
-	void handleInput();
-	void jump();
+	/// <summary>
+	/// Delegate execution of actions to Commands
+	/// </summary>
+	void handleInput(int);
+
+	/// <summary>
+	/// Pointer to commands for each button.
+	/// </summary>
+	Command* button_x;
 };

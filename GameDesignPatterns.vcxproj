@@ -127,11 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="GameDesignPatterns.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="MenuItems.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions.h" />
+    <ClInclude Include="command.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="menuItems.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
