@@ -97,6 +97,11 @@ public:
 	void handleInput();
 
 	/// <summary>
+	/// Display the commands currently assigned to each button
+	/// </summary>
+	void displayCurrentConfig();
+
+	/// <summary>
 	/// Configure the buttons with access to the commands.
 	/// </summary>
 	void buttonConfig();

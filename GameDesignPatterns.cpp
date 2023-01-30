@@ -19,6 +19,53 @@ void DisplayCommands()
 	cout << "\n(J)ump";
 }
 
+void InputHandler::displayCurrentConfig()
+{
+	// display assignment for B
+	cout << "B: ";
+	if (button_b_cmd_delegate != nullptr)
+	{
+		cout << button_b_cmd_delegate->currently_assigned_command() << endl;
+	}
+	else
+	{
+		cout << "NOT ASSIGNED" << endl;
+	}
+
+	// display assignment for X
+	cout << "X: ";
+	if (button_x_cmd_delegate != nullptr)
+	{
+		cout << button_x_cmd_delegate->currently_assigned_command() << endl;
+	}
+	else
+	{
+		cout << "NOT ASSIGNED" << endl;
+	}
+
+	// display assignment for Y
+	cout << "Y: ";
+	if (button_y_cmd_delegate != nullptr)
+	{
+		cout << button_y_cmd_delegate->currently_assigned_command() << endl;
+	}
+	else
+	{
+		cout << "NOT ASSIGNED" << endl;
+	}
+
+	// display assignment for A
+	cout << "A: ";
+	if (button_a_cmd_delegate != nullptr)
+	{
+		cout << button_a_cmd_delegate->currently_assigned_command() << endl;
+	}
+	else
+	{
+		cout << "NOT ASSIGNED" << endl;
+	}
+}
+
 // TODO: Redraw menu.
 void InputHandler::buttonConfig()
 {
@@ -28,18 +75,11 @@ void InputHandler::buttonConfig()
 	do {
 		system("cls");
 		cout << "\t Assign buttons:" << endl;
-		// display currently assigned buttons
-		cout << "A: ";
-		if (button_a_cmd_delegate != nullptr)
-		{
-			cout << button_a_cmd_delegate->currently_assigned_command() << endl;
-		}
-		else
-		{
-			cout << "NOT ASSIGNED" << endl;
-		}
 
+		displayCurrentConfig();
+		
 		cout << "choose which button to reassign\n";
+		
 		cin >> assignment;
 		
 		if (assignment == 65 || assignment == 97)
@@ -55,12 +95,15 @@ void InputHandler::buttonConfig()
 		}
 
 		cout << "\n\nstanding by...";
+		
 		cin >> assignment;
+		
 		if (assignment == 'B' || assignment == 'b')
 		{
 			button_a_cmd_delegate = new BlockCommand();
-			cout << "A is now set to " << button_a_cmd_delegate->currently_assigned_command();
 		}
+		
+		displayCurrentConfig();
 
 		cout << "\n\nstanding by...";
 		
