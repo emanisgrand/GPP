@@ -1,87 +1,84 @@
 #include "pch.h"
+static GameActor* actor = new GameActor();
 
-class JumpCommand : public Command
+void MainMenu()
 {
-public:
-	virtual void execute() { jump(); }
-};
+	system("cls");
+	cout << "\t THE GAME " << endl;
+	cout << "1. Play\n";
+	cout << "2. Options" << endl;
+}
 
-class GrappleCommand : public Command
+void InputHandler::buttonConfig()
 {
-public:
-	virtual void execute() { grapple(); }
-};
+	BUTTON input;
+	do {
+		system("cls");
+		cout << "\t Assign buttons:" << endl;
+		// display currently assigned buttons
+		cout << "A: ";
+		if (button_a_cmd_delegate != nullptr)
+		{
+			cout << button_a_cmd_delegate->currently_assigned_command() << endl;
+		}
+		else
+		{
+			cout << "NOT ASSIGNED" << endl;
+		}
 
-class CoverCommand : public Command
-{
-public:
-	virtual void execute() { cover(); }
-};
+		cin >> input;
+	} while (input != 9);
+}
 
-class BlockCommand : public Command
-{
-public:
-	virtual void execute() { block(); }
-};
-
-/// <summary>
-/// Should store pointer to a COMMAND for each BUTTON.
-/// </summary>
-class InputHandler
-{
-private:
-	/// <summary>
-	/// TODO: returns true if the button value passed in matches
-	/// the hard coded comparison
-	/// </summary>
-	/// <returns></returns>
-	bool isPressed(int);
-
-public:
-	/// <summary>
-	/// Delegate execution of actions to Commands
-	/// </summary>
-	void handleInput(int);
-};
-
-
-int main()
+void InputHandler::handleInput()
 {	
-	MenuItem* menu = new MenuItem;
-
-	/// <summary>
-	/// Pointer to a Command class, initialized to a custom command.
-	/// </summary>
-	/// <returns>Object.</returns>
-	Command* button_x = new JumpCommand;
-	Command* button_y = new BlockCommand;
-	Command* button_a = new GrappleCommand;
-	Command* button_b = new CoverCommand;
-	
+	BUTTON pressed;
 	do
 	{
-		DisplayMenu();
-		cin >> menu->option;
-		switch (menu->option)
+		cout << "\tawaiting input...\n";
+		cin >> pressed;
+		switch (pressed)
 		{
-			DisplayMenu();
-			case BUTTON_X:
-				button_x->execute();
-				break;
-			case BUTTON_Y:
-				button_y->execute();
-				break;
-			case BUTTON_A:
-				button_a->execute();
-				break;
-			case BUTTON_B:
-				button_b->execute();
-				break;
-			default:
-				cout << "WRONG!\n";
-				break;
+		case BUTTON_A:
+			/// <summary>
+			/// what is going on here?
+			/// </summary>
+			button_a_cmd_delegate->execute(*actor);
+			break;
+		case BUTTON_B:
+			button_b_cmd_delegate->execute(*actor);
+			break;
+		case BUTTON_X:
+			button_x_cmd_delegate->execute(*actor);
+			break;
+		case BUTTON_Y:
+			button_y_cmd_delegate->execute(*actor);
+			break;
+		default:
+			cout << "DRONE";
+			break;
 		}
-	} while (menu->option != 9);
-	
+	} while (pressed != 9);
+}
+
+int main()
+{
+	InputHandler ih = InputHandler();
+	BUTTON input;
+	do {
+		MainMenu();
+		cin >> input;
+		switch (input)
+		{
+		case 2:
+			// set keys option
+			ih.buttonConfig();
+			break;
+		default:
+			"thank you.";
+			break;
+		}
+	} while (input != 9);
+	ih.handleInput();
 }
 

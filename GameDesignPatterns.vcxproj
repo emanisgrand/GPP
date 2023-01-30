@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="GameActor.cpp" />
     <ClCompile Include="GameDesignPatterns.cpp" />
     <ClCompile Include="MenuItems.cpp" />
   </ItemGroup>
