@@ -38,7 +38,10 @@ public:
 class Command
 {
 public:
-	virtual string currently_assigned_command();
+	/// <summary>
+	/// Declared but not defined.
+	/// </summary>
+	virtual string currently_assigned_command() { return " "; }
 
 	/// <summary>
 	/// Destructor
@@ -56,32 +59,29 @@ public:
 class JumpCommand : public Command
 {
 public:
-	virtual string currently_assigned_command() { return "jump"; }
 	virtual void execute(GameActor& actor) { actor.jump(); }
+	virtual string currently_assigned_command() { return "jump."; }
 };
 
 class GrappleCommand : public Command
 {
 public:
-
-	virtual string currently_assigned_command() { return "grapple"; }
 	virtual void execute(GameActor& actor) { actor.grapple(); }
+	virtual string currently_assigned_command() { return "grapple."; }
 };
 
 class CoverCommand : public Command
 {
 public:
-
-	virtual string currently_assigned_command() { return "cover"; }
 	virtual void execute(GameActor& actor) { actor.cover(); }
+	virtual string currently_assigned_command() { return "cover."; }
 };
 
 class BlockCommand : public Command
 {
 public:
-
-	virtual string currently_assigned_command() { return "block"; }
 	virtual void execute(GameActor& actor) { actor.block(); }
+	virtual string currently_assigned_command() { return "block."; }
 };
 
 #pragma endregion

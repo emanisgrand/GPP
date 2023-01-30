@@ -8,10 +8,23 @@ void MainMenu()
 	cout << "1. Play\n";
 	cout << "2. Options" << endl;
 }
+/// <summary>
+/// Menu item.
+/// </summary>
+void DisplayCommands()
+{
+	cout << "\n(B)lock";
+	cout << "\n(C)over";
+	cout << "\n(G)rapple";
+	cout << "\n(J)ump";
+}
 
+// TODO: Redraw menu.
 void InputHandler::buttonConfig()
 {
 	BUTTON input;
+	char assignment;
+
 	do {
 		system("cls");
 		cout << "\t Assign buttons:" << endl;
@@ -26,7 +39,33 @@ void InputHandler::buttonConfig()
 			cout << "NOT ASSIGNED" << endl;
 		}
 
+		cout << "choose which button to reassign\n";
+		cin >> assignment;
+		
+		if (assignment == 65 || assignment == 97)
+		{
+			cout << "Reassigning A" << endl;
+
+			cout << "Bind what to A?";
+			DisplayCommands();
+		}
+		else
+		{
+			cout << "please choose a valid option.\n";
+		}
+
+		cout << "\n\nstanding by...";
+		cin >> assignment;
+		if (assignment == 'B' || assignment == 'b')
+		{
+			button_a_cmd_delegate = new BlockCommand();
+			cout << "A is now set to Block!";
+		}
+
+		cout << "\n\nstanding by...";
+		
 		cin >> input;
+	
 	} while (input != 9);
 }
 
