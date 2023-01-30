@@ -59,7 +59,7 @@ void InputHandler::buttonConfig()
 		if (assignment == 'B' || assignment == 'b')
 		{
 			button_a_cmd_delegate = new BlockCommand();
-			cout << "A is now set to Block!";
+			cout << "A is now set to " << button_a_cmd_delegate->currently_assigned_command();
 		}
 
 		cout << "\n\nstanding by...";
