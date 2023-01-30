@@ -21,6 +21,17 @@ void DisplayCommands()
 
 void InputHandler::displayCurrentConfig()
 {
+	// display assignment for A
+	cout << "A: ";
+	if (button_a_cmd_delegate != nullptr)
+	{
+		cout << button_a_cmd_delegate->currently_assigned_command() << endl;
+	}
+	else
+	{
+		cout << "NOT ASSIGNED" << endl;
+	}
+
 	// display assignment for B
 	cout << "B: ";
 	if (button_b_cmd_delegate != nullptr)
@@ -48,17 +59,6 @@ void InputHandler::displayCurrentConfig()
 	if (button_y_cmd_delegate != nullptr)
 	{
 		cout << button_y_cmd_delegate->currently_assigned_command() << endl;
-	}
-	else
-	{
-		cout << "NOT ASSIGNED" << endl;
-	}
-
-	// display assignment for A
-	cout << "A: ";
-	if (button_a_cmd_delegate != nullptr)
-	{
-		cout << button_a_cmd_delegate->currently_assigned_command() << endl;
 	}
 	else
 	{
