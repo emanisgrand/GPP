@@ -15,6 +15,23 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+enum CommandStates
+{
+	Jump,
+	Block,
+	Cover,
+	Grapple,
+	Unassigned
+};
+
+enum Buttons
+{
+	A,
+	B,
+	X, 
+	Y
+};
+
 #pragma region Actors & Actions
 class GameActor
 {
@@ -37,11 +54,13 @@ public:
 /// </summary>
 class Command
 {
+	CommandStates currentState = Unassigned;
 public:
 	/// <summary>
 	/// Declared but not defined.
 	/// </summary>
 	virtual string currently_assigned_command() { return " "; }
+
 
 	/// <summary>
 	/// Destructor
@@ -60,28 +79,28 @@ class JumpCommand : public Command
 {
 public:
 	virtual void execute(GameActor& actor) { actor.jump(); }
-	virtual string currently_assigned_command() { return "jump."; }
+	virtual string currently_assigned_command() { return "JUMP"; }
 };
 
 class GrappleCommand : public Command
 {
 public:
 	virtual void execute(GameActor& actor) { actor.grapple(); }
-	virtual string currently_assigned_command() { return "grapple."; }
+	virtual string currently_assigned_command() { return "GRAPPLE"; }
 };
 
 class CoverCommand : public Command
 {
 public:
 	virtual void execute(GameActor& actor) { actor.cover(); }
-	virtual string currently_assigned_command() { return "cover."; }
+	virtual string currently_assigned_command() { return "COVER"; }
 };
 
 class BlockCommand : public Command
 {
 public:
 	virtual void execute(GameActor& actor) { actor.block(); }
-	virtual string currently_assigned_command() { return "block."; }
+	virtual string currently_assigned_command() { return "BLOCK"; }
 };
 
 #pragma endregion
@@ -109,6 +128,7 @@ private:
 	/// <summary>
 	/// Store a pointer to a command for each button
 	/// </summary>
+	//Command& commandRegister;
 	Command* button_x_cmd_delegate;
 	Command* button_y_cmd_delegate;
 	Command* button_a_cmd_delegate;

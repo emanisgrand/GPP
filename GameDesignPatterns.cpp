@@ -8,6 +8,7 @@ void MainMenu()
 	cout << "1. Play\n";
 	cout << "2. Options" << endl;
 }
+
 /// <summary>
 /// Menu item.
 /// </summary>
@@ -16,7 +17,7 @@ void DisplayCommands()
 	cout << "\n(B)lock";
 	cout << "\n(C)over";
 	cout << "\n(G)rapple";
-	cout << "\n(J)ump";
+	cout << "\n(J)ump\n" << endl;
 }
 
 void InputHandler::displayCurrentConfig()
@@ -71,41 +72,67 @@ void InputHandler::buttonConfig()
 {
 	BUTTON input;
 	char assignment;
+	Command* cmdReg;
 
 	do {
 		system("cls");
 		cout << "\t Assign buttons:" << endl;
 
 		displayCurrentConfig();
-		
-		cout << "choose which button to reassign\n";
+
+		cout << "choose which Command to reassign\n";
+		DisplayCommands();
+		cin >> assignment;
+
+		if (assignment == 'C' || assignment == 'c')
+		{
+			cmdReg = new CoverCommand();
+		}
+		else if (assignment == 'B' || assignment == 'b')
+		{
+			cmdReg = new BlockCommand();
+		}
+		else if (assignment == 'J' || assignment == 'j')
+		{
+			cmdReg = new JumpCommand();
+		}
+		else if (assignment == 'G' || assignment == 'g')
+		{
+			cmdReg = new GrappleCommand();
+		}
+
+		cout << "choose which button to assign " << cmdReg->currently_assigned_command()<< " to.\n(A)\n(B)\n(X)\n(Y)\n";
 		
 		cin >> assignment;
-		
-		if (assignment == 65 || assignment == 97)
-		{
-			cout << "Reassigning A" << endl;
 
-			cout << "Bind what to A?";
-			DisplayCommands();
+		if (assignment == 'a' || assignment == 'A')
+		{
+			cout << "Reassigning A..." << endl;
+			button_a_cmd_delegate = cmdReg;
+		}
+		else if (assignment == 'b' || assignment == 'B')
+		{
+			cout << "Reassigning B..." << endl;
+			button_b_cmd_delegate = cmdReg;
+		}
+		else if (assignment == 'x' || assignment == 'X')
+		{
+			cout << "Reassigning X..." << endl;
+			button_x_cmd_delegate = cmdReg;
+		}
+		else if (assignment == 'y' || assignment == 'Y')
+		{
+			cout << "Reassigning Y..." << endl;
+			button_y_cmd_delegate = cmdReg;
 		}
 		else
 		{
 			cout << "please choose a valid option.\n";
 		}
 
-		cout << "\n\nstanding by...";
-		
-		cin >> assignment;
-		
-		if (assignment == 'B' || assignment == 'b')
-		{
-			button_a_cmd_delegate = new BlockCommand();
-		}
-		
 		displayCurrentConfig();
 
-		cout << "\n\nstanding by...";
+		cout << "\n\nstanding by...\n";
 		
 		cin >> input;
 	
@@ -122,9 +149,6 @@ void InputHandler::handleInput()
 		switch (pressed)
 		{
 		case BUTTON_A:
-			/// <summary>
-			/// what is going on here?
-			/// </summary>
 			button_a_cmd_delegate->execute(*actor);
 			break;
 		case BUTTON_B:
@@ -152,6 +176,9 @@ int main()
 		cin >> input;
 		switch (input)
 		{
+		case 1:
+			ih.handleInput();
+			break;
 		case 2:
 			// set keys option
 			ih.buttonConfig();
